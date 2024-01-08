@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="title"><span id="word1">Dice</span> <span id="word2">Roller</span></h1>
+
+    <div id="num-dice">
+        <h2>Number of Dice</h2> <!--source: https://www.w3schools.com/tags/att_input_type_checkbox.asp-->
+        <input type="checkbox" id="one" value="1">
+        <label for="one">One</label></br>
+        <input type="checkbox" id="two" value="2">
+        <label for="two">Two</label></br>
+        <input type="checkbox" id="three" value="3">
+        <label for="three">Three</label>
+    </div>
+
+    <div id="stats">
+        <p>Dice Rolled: <span id="dice-rolled">0</span></p>
+        <p>Mean: <span id="mean">N/A</span></p>
+        <p>Median: <span id="median">N/A</span></p>
+        <p>Mode: <span id="mode">N/A</span></p>
+        <p>Doubles rolled: 0</p>
+        <p>Triples rolled: 0</p>
+    </div>
+</body>
+</html>
