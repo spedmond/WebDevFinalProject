@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
+
+#title {
+    text-align: center;
+    font-family: 'Patua One', serif;
+}
+
+#word1 {
+    color: rgb(186, 12, 0);
+}
+
+#num-dice {
+    border-radius: 5px;
+    background-color: rgb(168, 157, 157);
+}
