@@ -3,6 +3,7 @@
 #title {
     text-align: center;
     font-family: 'Patua One', serif;
+    font-size: 50px;
 }
 
 #word1 {
@@ -12,4 +13,13 @@
 #num-dice {
     border-radius: 5px;
     background-color: rgb(168, 157, 157);
+}
+
+#dice {
+    text-align: center;
+}
+
+#dice img {
+    width: 100px;
+    height: auto;
 }
