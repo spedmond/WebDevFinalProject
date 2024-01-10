@@ -4,30 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="script.js"></script>
+    <title>Dice Roller</title>
+    <script src="script.js" async></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 </head>
 <body>
     <h1 id="title"><span id="word1">Dice</span> <span id="word2">Roller</span></h1>
 
+    <div id="dice">
+        <img src="images/dice/one.png" id="d1">
+        <img src="images/dice/two.png" id="d2">
+        <img src="images/dice/three.png" id="d3">
+    </div>
+    <button id="roll">Roll</button>
+
     <div id="num-dice">
-        <h2>Number of Dice</h2> <!--source: https://www.w3schools.com/tags/att_input_type_checkbox.asp-->
-        <input type="checkbox" id="one" value="1">
-        <label for="one">One</label></br>
-        <input type="checkbox" id="two" value="2">
-        <label for="two">Two</label></br>
-        <input type="checkbox" id="three" value="3">
-        <label for="three">Three</label>
+        <h2>Number of Dice</h2>
+        <button id="one">One</button></br>
+        <button id="two">Two</button></br>
+        <button id="three">Three</button>
     </div>
 
     <div id="stats">
+        <h2>Stats</h2>
         <p>Dice Rolled: <span id="dice-rolled">0</span></p>
         <p>Mean: <span id="mean">N/A</span></p>
         <p>Median: <span id="median">N/A</span></p>
         <p>Mode: <span id="mode">N/A</span></p>
-        <p>Doubles rolled: 0</p>
-        <p>Triples rolled: 0</p>
+        <p id="doubles">Doubles rolled: <span id="doubles-rolled">0</span></p>
+        <p id="triples">Triples rolled: <span id="triples-rolled">0</span></p>
     </div>
 </body>
 </html>
