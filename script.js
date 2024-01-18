@@ -55,7 +55,6 @@ roll.addEventListener("click", display.bind());
 function rollDice() {
     let result = Math.floor(Math.random()*5+1);
     allRolls.push(result);
-    console.log(allRolls)
     lastSet.push(result); //After rolling dice, use reset() to clear array.
     if (result==1) {
         numOnes++;
@@ -83,39 +82,62 @@ function rollDice() {
     }
 }
 
-function reset() {
-    lastSet = [];
-}
-
 const diceRolled = document.getElementById("dice-rolled");
-
+const doublesRolled = document.getElementById("doubles-rolled");
+const triplesRolled = document.getElementById("triples-rolled");
+const mean = document.getElementById("mean");
 function display() {
     d1.src = rollDice();
     if (isTwo) {
-        d2.src = rollDice();                                           
+        d2.src = rollDice();
+        if (doubleFound()) {
+            numDoubles++;
+            doublesRolled.textContent = numDoubles;
+        }                                      
     }
     if (isThree) {
         d2.src = rollDice();
         d3.src = rollDice();
-    }
-    diceRolled.textContent = numOnes+numTwos+numThrees+numFours+numFives+numSixes;
-
-    if (allRolls.length%2==0) {
-        median.textContent = (allRolls[allRolls.length/2]+allRolls[allRolls.length/2-1])/2
-    }
-    else {
-        median.textContent = allRolls[allRolls.length/2];
-    }
-}
-
-function doubleFound() {
-    for (let i = lastSet.length-1; i > 0; i++) {
-        if (lastSet.indexOf(lastSet[i])!=lastSet[i]) {
-            return true;
+        if (tripleFound()) {
+            numTriples++;
+            doublesRolled.textContent = numDoubles;
+            triplesRolled.textContent = numTriples;
         }
     }
+    lastSet = [];
+    diceRolled.textContent = numOnes+numTwos+numThrees+numFours+numFives+numSixes;
+    median.textContent = findMedian();
+    mean.textContent = (allRolls.reduce((total,currentValue)=>total+currentValue,0)/allRolls.length).toFixed(3);
 }
 
-function tripleFound() {
+function findMedian() {
+    allRolls.sort();
+    if (allRolls.length%2==0) {
+        return (allRolls[allRolls.length/2]+allRolls[allRolls.length/2-1])/2;
+    }
+    return allRolls[Math.floor(allRolls.length/2)];
+}
 
+let numDoubles = 0;
+//https://stackoverflow.com/questions/7376598/in-javascript-how-do-i-check-if-an-array-has-duplicate-values
+function doubleFound() {
+    let valuesSoFar = [];
+    for (let i = 0; i < lastSet.length; i++) {
+        let value = lastSet[i];
+        if (valuesSoFar.indexOf(value) !== -1) {
+            numDoubles++;
+            return true;
+        }
+        valuesSoFar.push(value);
+    }
+}
+
+let numTriples = 0;
+function tripleFound() {
+    if (doubleFound()) {
+        numDoubles++;
+    }
+    if (lastSet[0]==lastSet[1] && lastSet[1]==lastSet[2]) {
+        return true;
+    }
 }
