@@ -1,4 +1,3 @@
-const roll = document.getElementById("roll");
 const one = document.getElementById("one");
 const two = document.getElementById("two");
 const three = document.getElementById("three");
@@ -9,9 +8,18 @@ let isOne = false;
 let isTwo = false;
 let isThree = true;
 
+const roll = document.getElementById("roll");
+const timesRolled = document.getElementById("times-rolled");
 const d1 = document.getElementById("d1");
 const d2 = document.getElementById("d2");
 const d3 = document.getElementById("d3");
+
+let numRolls = 0;
+
+roll.addEventListener("click", ()=> {
+    numRolls = parseInt(timesRolled.value);
+    console.log(numRolls);
+})
 
 one.addEventListener("click", () => {
     doubles.style.display = "none";
@@ -49,8 +57,9 @@ let numSixes = 0;
 let lastSet = [];
 let allRolls = [];
 
-//https://stackoverflow.com/questions/16310423/addeventlistener-calls-the-function-without-me-even-asking-it-to
+//Usage of bind: https://stackoverflow.com/questions/16310423/addeventlistener-calls-the-function-without-me-even-asking-it-to
 roll.addEventListener("click", display.bind());
+const error = document.getElementById("error");
 
 function rollDice() {
     let result = Math.floor(Math.random()*5+1);
@@ -85,29 +94,41 @@ function rollDice() {
 const diceRolled = document.getElementById("dice-rolled");
 const doublesRolled = document.getElementById("doubles-rolled");
 const triplesRolled = document.getElementById("triples-rolled");
-const mean = document.getElementById("mean");
+const meanCount = document.getElementById("mean");
+const modeCount = document.getElementById("mode");
+
 function display() {
-    d1.src = rollDice();
-    if (isTwo) {
-        d2.src = rollDice();
-        if (doubleFound()) {
-            numDoubles++;
-            doublesRolled.textContent = numDoubles;
-        }                                      
-    }
-    if (isThree) {
-        d2.src = rollDice();
-        d3.src = rollDice();
-        if (tripleFound()) {
-            numTriples++;
-            doublesRolled.textContent = numDoubles;
-            triplesRolled.textContent = numTriples;
+    if (numRolls>0) {
+        error.style.display = "none";
+        for (let i = 0; i < numRolls; i++) {
+            d1.src = rollDice();
+            if (isTwo) {
+                d2.src = rollDice();
+                if (doubleFound()) {
+                    numDoubles++;
+                    doublesRolled.textContent = numDoubles;
+                }                                      
+            }
+            if (isThree) {
+                d2.src = rollDice();
+                d3.src = rollDice();
+                if (tripleFound()) {
+                    numTriples++;
+                    doublesRolled.textContent = numDoubles;
+                    triplesRolled.textContent = numTriples;
+                }
+            }
+        lastSet = [];
+        diceRolled.textContent = numOnes+numTwos+numThrees+numFours+numFives+numSixes;
+        median.textContent = findMedian();
+        meanCount.textContent = (allRolls.reduce((total,currentValue)=>total+currentValue,0)/allRolls.length).toFixed(3);
+        modeCount.textContent = findMode();
         }
+        
     }
-    lastSet = [];
-    diceRolled.textContent = numOnes+numTwos+numThrees+numFours+numFives+numSixes;
-    median.textContent = findMedian();
-    mean.textContent = (allRolls.reduce((total,currentValue)=>total+currentValue,0)/allRolls.length).toFixed(3);
+    else {
+        error.style.display = "block";
+    }
 }
 
 function findMedian() {
@@ -140,4 +161,24 @@ function tripleFound() {
     if (lastSet[0]==lastSet[1] && lastSet[1]==lastSet[2]) {
         return true;
     }
+}
+
+//https://codereview.stackexchange.com/questions/68315/finding-the-mode-of-an-array
+function findMode(){
+    var numMapping = {};
+    for(var i = 0; i < allRolls.length; i++){
+        if(numMapping[allRolls[i]] === undefined){
+            numMapping[allRolls[i]] = 0;
+        }        
+            numMapping[allRolls[i]] += 1;
+    }
+    var greatestFreq = 0;
+    var mode;
+    for(var prop in numMapping){
+        if(numMapping[prop] > greatestFreq){
+            greatestFreq = numMapping[prop];
+            mode = prop;
+        }
+    }
+    return parseInt(mode);
 }
