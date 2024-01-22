@@ -20,8 +20,8 @@
     <form>
 
     </form>
-    <span>Times rolled: <input type="number" id="times-rolled" min="1"> </span> <input type="submit" id="roll" value="Roll">
-
+    <span>Times to roll: <input type="number" id="times-rolled" min="1"> </span> <input type="submit" id="roll" value="Roll">
+    <div id="error">Error: Input must be greater than 0.</div>
     <div id="num-dice">
         <h2>Number of Dice</h2>
         <button id="one">One</button></br>
@@ -38,5 +38,57 @@
         <p id="doubles">Doubles rolled: <span id="doubles-rolled">0</span></p>
         <p id="triples">Triples rolled: <span id="triples-rolled">0</span></p>
     </div>
+
+    <div>Total Frequency Table</div>
+    <table>
+        <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+        </tr>
+        <tr>
+            <td id="1">0</td>
+            <td id="2">0</td>
+            <td id="3">0</td>
+            <td id="4">0</td>
+            <td id="5">0</td>
+            <td id="6">0</td>
+        </tr>
+        <tr>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+        </tr>
+        <tr>
+            <td id="7">0</td>
+            <td id="8">0</td>
+            <td id="9">0</td>
+            <td id="10">0</td>
+            <td id="11">0</td>
+            <td id="12">0</td>
+        </tr>
+        <tr>
+            <th>13</th>
+            <th>14</th>
+            <th>15</th>
+            <th>16</th>
+            <th>17</th>
+            <th>18</th>
+        </tr>
+        <tr>
+            <td id="13">0</td>
+            <td id="14">0</td>
+            <td id="15">0</td>
+            <td id="16">0</td>
+            <td id="17">0</td>
+            <td id="18">0</td>
+        </tr>
+    </table>
 </body>
 </html>
